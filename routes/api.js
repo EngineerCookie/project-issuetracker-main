@@ -42,22 +42,30 @@ module.exports = function (app) {
   app.route('/api/issues/:project')
   
     .get(async function (req, res){
-      let project = req.params.project;
-      let issueModel = mongoose.model(project, issueSchema);
-      let returnObj = await issueModel.find(req.query);
-      if (returnObj.length < 1) {returnObj = await issueModel.find({})}
-      res.json(returnObj) 
+      try {
+        let project = req.params.project;
+        let issueModel = mongoose.model(project, issueSchema);
+        let returnObj = await issueModel.find(req.query).select({ __v: 0});
+        if (returnObj.length < 1) {returnObj = await issueModel.find({}).select({ __v: 0})}
+        res.json(returnObj) 
+
+      } catch (err) {
+        res.json({ error: 'required field(s) missing' })
+      }
     })
     
     .post(async function (req, res){
       let project = req.params.project;
       let issueModel = mongoose.model(project, issueSchema);
       let returnObj = await issueModel.create(req.body);
-      res.json(returnObj)
+      let result = await issueModel.find({ _id : returnObj._id}).select({ __v: 0 });
+      console.log(result);
+      res.json(result)
     })
     
     .put(async function (req, res){
       try {
+        if (req.body._id = "") {return res.json({ error: 'missing _id' })}
         let project = req.params.project;
         let issueModel = mongoose.model(project, issueSchema);
         let queryResult = {};
@@ -65,6 +73,7 @@ module.exports = function (app) {
         let filterEmpty = queryKeys.filter(key => {
           return req.body[key] != '' && key != '_id'
         });
+        if (filterEmpty.length < 1) {return res.json({ error: 'no update field(s) sent', '_id': req.body._id })}
         filterEmpty.forEach(key => {
           queryResult[key] = req.body[key]
         });
@@ -86,6 +95,7 @@ module.exports = function (app) {
     
     .delete(async function (req, res){
       try {
+        if (req.body._id = "") {return res.json({ error: 'missing _id' })}
         let project = req.params.project;
         let issueModel = mongoose.model(project, issueSchema);
         await issueModel.deleteOne({ _id: req.body._id})
@@ -93,7 +103,6 @@ module.exports = function (app) {
       } catch(err) {
         res.json({"error":"could not delete","_id":req.body._id})
       }
-      
     });
     
 };
