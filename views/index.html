@@ -14,33 +14,9 @@
         Issue Tracker
       </h1>
     </header>
-    <section style="margin: 0 50px;">
-      <h3>Example <code>GET</code> usage</h3>
-      <code>/api/issues/{project}</code><br>
-      <code>/api/issues/{project}?open=true&amp;assigned_to=Joe</code><br>
-      <h3>Example return</h3>
-      <pre>
-<code>[
-  { 
-    "_id": "5871dda29faedc3491ff93bb",
-    "issue_title": "Fix error in posting data",
-    "issue_text": "When we post data it has an error.",
-    "created_on": "2017-01-08T06:35:14.240Z",
-    "updated_on": "2017-01-08T06:35:14.240Z",
-    "created_by": "Joe",
-    "assigned_to": "Joe",
-    "open": true,
-    "status_text": "In QA"
-  },
-  ...
- ]
-</code>
-</pre>
-    </section>
     <hr style='margin: 0 50px'>
+    <main>
     <section id='testui' style='margin-left: 50px;'>
-      <h3>Examples</h3>
-      Go to <a href='/api/issues/apitest/'><code>/api/issues/apitest/</code></a>  project
       <h2 style="text-align: left">API Tests</h2>
       <h3>Submit issue on <i>apitest</i></h3>
       <form id="testForm" class="border">
@@ -69,7 +45,15 @@
       </form>
       <code id='jsonResult'></code>
     </section>
-    <hr style='margin: 50px; margin-top: 200px'>
+    <section class="tool-ref">
+      <h3 class="issues-ref">Check all issues in <a href='/api/issues/apitest/'><i>apitest</i></a></h3>
+      <h3 class="issues-ref">Forum styled issue tracker in <a href="/apitest/"><i>apitest</i></a></h3>
+    </section>
+  </main>
+  <hr style='margin: 50px; margin-top: 200px'>
+  <footer>
+    <p class="attribution">This was coded by EngineerCookie as a certification project in <a href="https://www.freecodecamp.org/learn/quality-assurance/quality-assurance-projects/issue-tracker">freeCodeCamp</a></p>
+  </footer>
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
@@ -113,3 +97,32 @@
    </script>
   </body>
 </html>
+
+<!--
+
+    <section style="margin: 0 50px;">
+      <h3>Example <code>GET</code> usage</h3>
+      <code>/api/issues/{project}</code><br>
+      <code>/api/issues/{project}?open=true&amp;assigned_to=Joe</code><br>
+      <h3>Example return</h3>
+      <pre>
+<code>[
+  { 
+    "_id": "5871dda29faedc3491ff93bb",
+    "issue_title": "Fix error in posting data",
+    "issue_text": "When we post data it has an error.",
+    "created_on": "2017-01-08T06:35:14.240Z",
+    "updated_on": "2017-01-08T06:35:14.240Z",
+    "created_by": "Joe",
+    "assigned_to": "Joe",
+    "open": true,
+    "status_text": "In QA"
+  },
+  ...
+ ]
+</code>
+</pre>
+
+
+
+-->
